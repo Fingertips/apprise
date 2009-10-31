@@ -1,3 +1,13 @@
+require 'pathname'
+
+FIXTURE_ROOT = Pathname.new(File.expand_path('../fixtures', __FILE__))
+
+module Rails
+  def self.root
+    @root ||= FIXTURE_ROOT + 'rails_root'
+  end
+end
+
 module Apprise
   module Initializer
     VENDOR_RAILS = File.expand_path('../../../../rails', __FILE__)
@@ -34,18 +44,21 @@ module Apprise
       require File.join(PLUGIN_ROOT, 'rails', 'init')
     end
     
+    def self.checkout_fixture_repos
+      svn_checkout = Rails.root + 'vendor/plugins/svn'
+      unless svn_checkout.exist?
+        svn_repo = "file://#{FIXTURE_ROOT + 'repos/svn/trunk'}"
+        puts "[!] Creating checkout of `#{svn_repo}' in `#{svn_checkout}'"
+        unless system("svn co #{svn_repo} #{svn_checkout}")
+          raise "Creating checkout failed…"
+        end
+      end
+    end
+    
     def self.start
       load_dependencies
+      checkout_fixture_repos
     end
-  end
-end
-
-FIXTURE_ROOT = File.expand_path('../fixtures', __FILE__)
-
-require 'pathname'
-module Rails
-  def self.root
-    @root ||= Pathname.new(File.join(FIXTURE_ROOT, 'rails_root'))
   end
 end
 
