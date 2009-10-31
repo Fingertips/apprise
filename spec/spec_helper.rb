@@ -14,7 +14,6 @@ module Apprise
     
     def self.load_dependencies
       if rails_directory
-        p rails_directory
         $:.unshift(File.join(rails_directory, 'activesupport', 'lib'))
         $:.unshift(File.join(rails_directory, 'activerecord', 'lib'))
         $:.unshift(File.join(rails_directory, 'actionpack', 'lib'))
@@ -22,7 +21,7 @@ module Apprise
         require 'rubygems' rescue LoadError
       end
       
-      # require 'active_support'
+      require 'active_support'
       # require 'active_record'
       # require 'action_controller'
       
@@ -38,6 +37,15 @@ module Apprise
     def self.start
       load_dependencies
     end
+  end
+end
+
+FIXTURE_ROOT = File.expand_path('../fixtures', __FILE__)
+
+require 'pathname'
+module Rails
+  def self.root
+    @root ||= Pathname.new(File.join(FIXTURE_ROOT, 'rails_root'))
   end
 end
 

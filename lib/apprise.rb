@@ -1,1 +1,1 @@
-puts "Congratulations!"
+require 'apprise/plugin'
