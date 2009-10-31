@@ -74,7 +74,7 @@ class Test::Unit::TestCase
   
   def checkout_git_fixture_repo!
     unless File.exist?(git_repo)
-      unless system("cd #{FIXTURE_ROOT + 'repos'} && tar -xzvf git.tgz")
+      unless system("cd #{FIXTURE_ROOT + 'repos'} && tar -xzvf git.tgz > /dev/null 2>&1")
         raise "Unable to unpack git fixture repo…"
       end
     end
