@@ -3,8 +3,8 @@ process do |files|
     case file
     when /^spec\/.+_spec\.rb$/
       file
-    when 'lib/apprise.rb'
-      'spec/apprise_spec.rb'
+    when /^lib.+?(\w+)\.rb/
+      "spec/#{$1}_spec.rb"
     end
   end
   
