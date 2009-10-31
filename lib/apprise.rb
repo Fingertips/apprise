@@ -1,4 +1,5 @@
 require 'apprise/plugin'
+require 'apprise/bundler'
 
 module Apprise
   def self.outdated
