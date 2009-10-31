@@ -73,6 +73,12 @@ class Test::Unit::TestCase
   end
   
   def checkout_git_fixture_repo!
+    unless File.exist?(git_repo)
+      unless system("cd #{FIXTURE_ROOT + 'repos'} && tar -xzvf git.tgz")
+        raise "Unable to unpack git fixture repo…"
+      end
+    end
+    
     checkout 'git clone', git_repo, git_checkout
     unless system "cd #{git_checkout} && git reset b200b30bcf41e674b8c1bd013316498dfa193077 --hard  > /dev/null 2>&1"
       raise "Unable to reset the git repo…"
