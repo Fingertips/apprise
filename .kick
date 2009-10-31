@@ -1,0 +1,12 @@
+process do |files|
+  specs = files.take_and_map do |file|
+    case file
+    when /^spec\/.+_spec\.rb$/
+      file
+    when 'lib/apprise.rb'
+      'spec/apprise_spec.rb'
+    end
+  end
+  
+  run_ruby_tests specs
+end
