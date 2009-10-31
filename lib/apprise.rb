@@ -13,17 +13,11 @@ module Apprise
   end
   
   def self.dependencies
-    dependencies = []
-    dependencies.concat Apprise::Bundler.dependencies if Apprise::Bundler.usable?
-    dependencies.concat Apprise::Plugin.dependencies
-    dependencies
+    aggregate :dependencies
   end
   
   def self.outdated
-    outdated = []
-    outdated.concat Apprise::Bundler.outdated if Apprise::Bundler.usable?
-    outdated.concat Apprise::Plugin.outdated
-    outdated
+    aggregate :outdated
   end
   
   def self.run
@@ -39,6 +33,13 @@ module Apprise
   end
   
   private
+  
+  def self.aggregate(type)
+    list = []
+    list.concat Apprise::Bundler.send(type) if Apprise::Bundler.usable?
+    list.concat Apprise::Plugin.send(type)
+    list
+  end
   
   def self.humanize_source_type(source_type)
     case source_type
