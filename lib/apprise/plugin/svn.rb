@@ -19,6 +19,10 @@ module Apprise
         current_revision == latest_revision
       end
       
+      def update!
+        svn "up"
+      end
+      
       private
       
       def svn(args)

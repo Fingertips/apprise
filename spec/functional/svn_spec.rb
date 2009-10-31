@@ -25,4 +25,9 @@ describe "Apprise::Plugin::SVN" do
   it "should check whether or not a subversion repo is up to date" do
     @svn.should.not.be.up_to_date
   end
+  
+  it "should update the checkout" do
+    @svn.update!
+    @svn.should.be.up_to_date
+  end
 end
