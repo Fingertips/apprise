@@ -8,5 +8,6 @@ describe "Apprise::Plugin" do
   it "should return an instance for each plugin" do
     plugins = Apprise::Plugin.all
     plugins.map(&:name).should == %w{ git svn }
+    plugins.map(&:class).should == [Apprise::Plugin::Git, Apprise::Plugin::SVN]
   end
 end

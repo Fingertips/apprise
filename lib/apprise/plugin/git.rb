@@ -3,6 +3,10 @@ require 'apprise/plugin/base'
 module Apprise
   class Plugin
     class Git < Base
+      def self.repo?(directory)
+        (directory + '.git').exist?
+      end
+      
       executable :git
       
       def current_branch

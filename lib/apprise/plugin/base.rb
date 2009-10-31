@@ -3,6 +3,10 @@ module Apprise
     class Base
       class NotImplementedError < StandardError; end
       
+      def self.repo?(directory)
+        raise NotImplementedError, "The class `#{self.class.name}' does not implement ::repo?"
+      end
+      
       def self.executable(name)
         define_method name do |args|
           out = ''

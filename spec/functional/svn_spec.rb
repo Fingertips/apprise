@@ -6,6 +6,11 @@ describe "Apprise::Plugin::SVN" do
     @svn = Apprise::Plugin::SVN.new(svn_checkout)
   end
   
+  it "should return whether or not a directory is a svn repo" do
+    Apprise::Plugin::SVN.should.be.repo svn_checkout
+    Apprise::Plugin::SVN.should.not.be.repo git_checkout
+  end
+  
   it "should return it's name" do
     @svn.name.should == 'svn'
   end

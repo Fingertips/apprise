@@ -6,6 +6,11 @@ describe "Apprise::Plugin::Git" do
     @git = Apprise::Plugin::Git.new(git_checkout)
   end
   
+  it "should return whether or not a directory is a git repo" do
+    Apprise::Plugin::Git.should.be.repo git_checkout
+    Apprise::Plugin::Git.should.not.be.repo svn_checkout
+  end
+  
   it "should return it's name" do
     @git.name.should == 'git'
   end

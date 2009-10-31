@@ -3,6 +3,10 @@ require 'apprise/plugin/base'
 module Apprise
   class Plugin
     class SVN < Base
+      def self.repo?(directory)
+        (directory + '.svn').exist?
+      end
+      
       executable :svn
       
       def url
