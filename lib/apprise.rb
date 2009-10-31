@@ -5,10 +5,18 @@ module Apprise
   class << self
     attr_accessor :rails_root
   end
+  
   if const_defined?(:Rails)
     self.rails_root = Apprise.rails_root
   else
     self.rails_root = Pathname.new(Dir.pwd)
+  end
+  
+  def self.dependencies
+    dependencies = []
+    dependencies.concat Apprise::Bundler.dependencies if Apprise::Bundler.usable?
+    dependencies.concat Apprise::Plugin.dependencies
+    dependencies
   end
   
   def self.outdated
@@ -29,7 +37,7 @@ module Apprise
       end
     end
   end
-
+  
   def self._humanize_source_type(source_type)
     case source_type
     when 'svn'

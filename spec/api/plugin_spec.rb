@@ -11,6 +11,14 @@ describe "Apprise::Plugin" do
     plugins.map(&:class).should == [Apprise::Plugin::Git, Apprise::Plugin::SVN]
   end
   
+  it "should return a list of all dependencies" do
+    checkout_svn_fixture_repo! and checkout_git_fixture_repo!
+    Apprise::Plugin.dependencies.should == [
+      ['git', 'git'],
+      ['svn', 'svn']
+    ]
+  end
+  
   it "should return a list of outdated plugin repos" do
     svn = checkout_svn_fixture_repo!
     git = checkout_git_fixture_repo!

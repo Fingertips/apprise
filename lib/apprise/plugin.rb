@@ -1,7 +1,7 @@
 require 'pathname'
 
 module Apprise
-  class Plugin
+  module Plugin
     def self.plugin_root
       Apprise.rails_root + 'vendor/plugins'
     end
@@ -18,8 +18,18 @@ module Apprise
       end.compact
     end
     
+    def self.dependencies
+      names_and_types all
+    end
+    
     def self.outdated
-      all.reject { |p| p.up_to_date? }.map { |p| [p.name, p.class.scm] }
+      names_and_types all.reject { |p| p.up_to_date? }
+    end
+    
+    private
+    
+    def self.names_and_types(array)
+      array.map { |p| [p.name, p.class.scm] }
     end
   end
 end

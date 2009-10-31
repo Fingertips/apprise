@@ -1,7 +1,7 @@
 require 'apprise/plugin/base'
 
 module Apprise
-  class Plugin
+  module Plugin
     class Git < Base
       def self.repo?(directory)
         (directory + '.git').exist?

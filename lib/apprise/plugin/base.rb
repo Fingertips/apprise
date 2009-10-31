@@ -1,5 +1,5 @@
 module Apprise
-  class Plugin
+  module Plugin
     class Base
       class NotImplementedError < StandardError; end
       

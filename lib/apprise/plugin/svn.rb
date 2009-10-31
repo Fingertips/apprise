@@ -1,7 +1,7 @@
 require 'apprise/plugin/base'
 
 module Apprise
-  class Plugin
+  module Plugin
     class SVN < Base
       def self.repo?(directory)
         (directory + '.svn').exist?
