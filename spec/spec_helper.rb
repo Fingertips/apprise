@@ -72,12 +72,16 @@ end
 
 require 'test/unit'
 class Test::Unit::TestCase
+  def setup
+    Apprise.rails_root = Pathname.new(File.expand_path('../fixtures/rails_root', __FILE__))
+  end
+  
   def svn_repo
     "file://#{FIXTURE_ROOT + 'repos/svn/trunk'}"
   end
   
   def svn_checkout
-    Rails.root + 'vendor/plugins/svn'
+    Apprise.rails_root + 'vendor/plugins/svn'
   end
   
   def checkout_svn_fixture_repo!
@@ -90,7 +94,7 @@ class Test::Unit::TestCase
   end
   
   def git_checkout
-    Rails.root + 'vendor/plugins/git'
+    Apprise.rails_root + 'vendor/plugins/git'
   end
   
   def checkout_git_fixture_repo!

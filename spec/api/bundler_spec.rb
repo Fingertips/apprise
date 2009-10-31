@@ -3,7 +3,7 @@ require File.expand_path('../../spec_helper', __FILE__)
 if Apprise::Bundler.usable?
   describe "Apprise::Bundler" do
     it "should return the gemfile path" do
-      Apprise::Bundler.gemfile_path.should == Rails.root + 'Gemfile'
+      Apprise::Bundler.gemfile_path.should == Pathname.new(File.expand_path('../../fixtures/rails_root/Gemfile', __FILE__))
     end
   
     it "should return outdated gems if bundler finds outdated gems" do

@@ -1,10 +1,11 @@
 module Apprise
   class Bundler
     begin
+      require 'rubygems' rescue nil
       require 'bundler'
       
       def self.gemfile_path
-        Rails.root + 'Gemfile'
+        Apprise.rails_root + 'Gemfile'
       end
 
       def self.outdated

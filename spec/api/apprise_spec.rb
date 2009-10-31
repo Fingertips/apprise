@@ -27,7 +27,6 @@ describe "Apprise" do
       Apprise.run
     end.should == <<-OUTPUT
 Outdated dependencies
-
  * rails (Git submodule)
  * forestwatcher (Subversion external)
  * miso (Gem)

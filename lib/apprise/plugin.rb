@@ -3,7 +3,7 @@ require 'pathname'
 module Apprise
   class Plugin
     def self.plugin_root
-      Rails.root + 'vendor/plugins'
+      Apprise.rails_root + 'vendor/plugins'
     end
     
     def self.scms

@@ -2,7 +2,7 @@ require File.expand_path('../../spec_helper', __FILE__)
 
 describe "Apprise::Plugin" do
   it "should return the plugin root path" do
-    Apprise::Plugin.plugin_root.should == Rails.root + 'vendor/plugins'
+    Apprise::Plugin.plugin_root.should == Pathname.new(File.expand_path('../../fixtures/rails_root/vendor/plugins', __FILE__))
   end
   
   it "should return an instance for each plugin" do
