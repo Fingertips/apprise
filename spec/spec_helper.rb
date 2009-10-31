@@ -82,6 +82,7 @@ class Test::Unit::TestCase
   
   def checkout_svn_fixture_repo!
     checkout 'svn co -r1', svn_repo, svn_checkout
+    Apprise::Plugin::SVN.new(svn_checkout)
   end
   
   def git_repo
@@ -103,6 +104,8 @@ class Test::Unit::TestCase
     unless system "cd #{git_checkout} && git reset b200b30bcf41e674b8c1bd013316498dfa193077 --hard  > /dev/null 2>&1"
       raise "Unable to reset the git repo…"
     end
+    
+    Apprise::Plugin::Git.new(git_checkout)
   end
   
   def collect_stdout

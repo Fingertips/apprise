@@ -17,6 +17,10 @@ module Apprise
         end
       end.compact
     end
+    
+    def self.outdated
+      all.reject { |p| p.up_to_date? }.map { |p| [p.name, p.class.scm] }
+    end
   end
 end
 

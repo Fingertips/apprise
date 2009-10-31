@@ -2,8 +2,7 @@ require File.expand_path('../../spec_helper', __FILE__)
 
 describe "Apprise::Plugin::Git" do
   before do
-    checkout_git_fixture_repo!
-    @git = Apprise::Plugin::Git.new(git_checkout)
+    @git = checkout_git_fixture_repo!
   end
   
   it "should return whether or not a directory is a git repo" do

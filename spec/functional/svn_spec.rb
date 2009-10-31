@@ -2,8 +2,7 @@ require File.expand_path('../../spec_helper', __FILE__)
 
 describe "Apprise::Plugin::SVN" do
   before do
-    checkout_svn_fixture_repo!
-    @svn = Apprise::Plugin::SVN.new(svn_checkout)
+    @svn = checkout_svn_fixture_repo!
   end
   
   it "should return whether or not a directory is a svn repo" do

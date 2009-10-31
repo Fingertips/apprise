@@ -7,6 +7,10 @@ module Apprise
         Apprise::Plugin.scms << klass
       end
       
+      def self.scm
+        name.split('::').last.downcase
+      end
+      
       def self.repo?(directory)
         raise NotImplementedError, "The class `#{self.class.name}' does not implement ::repo?"
       end

@@ -10,4 +10,22 @@ describe "Apprise::Plugin" do
     plugins.map(&:name).should == %w{ git svn }
     plugins.map(&:class).should == [Apprise::Plugin::Git, Apprise::Plugin::SVN]
   end
+  
+  it "should return a list of outdated plugin repos" do
+    svn = checkout_svn_fixture_repo!
+    git = checkout_git_fixture_repo!
+    
+    Apprise::Plugin.outdated.should == [
+      ['git', 'git'],
+      ['svn', 'svn']
+    ]
+    
+    svn.update!
+    Apprise::Plugin.outdated.should == [
+      ['git', 'git']
+    ]
+    
+    git.update!
+    Apprise::Plugin.outdated.should.be.empty
+  end
 end
