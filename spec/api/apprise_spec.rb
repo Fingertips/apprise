@@ -12,6 +12,19 @@ describe "Apprise" do
     ])
   end
   
+  it "should use Rails.root if defined" do
+    Apprise.send(:discover_root).should == Rails.root
+    Apprise.rails_root.should == Rails.root
+  end
+  
+  it "should use the current working directory if Rails is not defined" do
+    Object.stubs(:const_defined?).with(:Rails).returns(false)
+    
+    Dir.chdir '/tmp' do
+      Apprise.send(:discover_root).should == Pathname.new(Dir.pwd)
+    end
+  end
+  
   it "should list all dependencies" do
     Apprise.dependencies.should == [
       ['miso', 'gem'],

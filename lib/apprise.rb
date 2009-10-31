@@ -6,12 +6,6 @@ module Apprise
     attr_accessor :rails_root
   end
   
-  if const_defined?(:Rails)
-    self.rails_root = Apprise.rails_root
-  else
-    self.rails_root = Pathname.new(Dir.pwd)
-  end
-  
   def self.dependencies
     aggregate :dependencies
   end
@@ -33,6 +27,12 @@ module Apprise
   end
   
   private
+  
+  def self.discover_root
+    Object.const_defined?(:Rails) ? Rails.root : Pathname.new(Dir.pwd)
+  end
+  
+  self.rails_root = discover_root
   
   def self.aggregate(type)
     list = []
