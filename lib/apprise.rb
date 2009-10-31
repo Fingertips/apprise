@@ -38,7 +38,7 @@ module Apprise
     list = []
     list.concat Apprise::Bundler.send(type) if Apprise::Bundler.usable?
     list.concat Apprise::Plugin.send(type)
-    list
+    list.sort_by { |name, _| name }
   end
   
   def self.humanize_source_type(source_type)

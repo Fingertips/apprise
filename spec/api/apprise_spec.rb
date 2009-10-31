@@ -7,8 +7,8 @@ describe "Apprise" do
     Apprise::Bundler.stubs(:dependencies).returns([['miso', 'gem']])
     
     Apprise::Plugin.stubs(:all).returns([
-      stub('SVN repo', :up_to_date? => false, :name => 'peiji-san', :class => Apprise::Plugin::SVN),
-      stub('Git repo', :up_to_date? => true,  :name => 'risosu-san', :class => Apprise::Plugin::Git)
+      stub('Git repo', :up_to_date? => true,  :name => 'risosu-san', :class => Apprise::Plugin::Git),
+      stub('SVN repo', :up_to_date? => false, :name => 'peiji-san', :class => Apprise::Plugin::SVN)
     ])
   end
   
@@ -42,18 +42,18 @@ describe "Apprise" do
   
   it "should print all outdated dependencies" do
     Apprise.stubs(:outdated).returns([
-      ['rails', 'git'],
       ['forestwatcher', 'svn'],
-      ['miso', 'gem']
+      ['miso', 'gem'],
+      ['rails', 'git']
     ])
     
     collect_stdout do
       Apprise.run
     end.should == <<-OUTPUT
 Outdated dependencies
- * rails (Git submodule)
  * forestwatcher (Subversion external)
  * miso (Gem)
+ * rails (Git submodule)
 OUTPUT
   end
 end
