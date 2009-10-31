@@ -12,3 +12,9 @@ process do |files|
   
   run_ruby_tests specs
 end
+
+process do |files|
+  if files.delete('README.rdoc')
+    execute "rdoc --charset 'utf-8' README.rdoc"
+  end
+end

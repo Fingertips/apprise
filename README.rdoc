@@ -1,5 +1,24 @@
 = Apprise!
 
+Apprise looks at your Ruby on Rails application and tried to figure out all
+the dependencies of the project and which ones are outdated.
+
+Apprise currently looks for three types of dependencies.
+
+- Gems specified in the Gemfile
+- Git checkouts of plugins in vendor/plugins
+- Subversion checkout of plugins in vendor/plugins
+
+== Using Apprise as a Rails plugin
+
+  $ ./script/plugin install git://github.com/Fingertips/apprise.git
+  $ rake deps:outdated
+
+== Using Apprise as a gem
+
+  $ gem install apprise --source http://gemcutter.org
+  $ apprise /path/to/rails
+
 == Requirements
 
 Apprise currently needs a patched version of Bundler, this version is
@@ -12,3 +31,6 @@ You can install it in the following way:
   $ git clone git://github.com/Fingertips/bundler.git
   $ cd bundler
   $ sudo rake install
+
+If you don't use Bundler, you don't have to install it. Apprise will
+work without it as well.
