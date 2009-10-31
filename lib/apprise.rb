@@ -33,12 +33,14 @@ module Apprise
     else
       puts "Outdated dependencies"
       outdated.each do |name, source_type|
-        puts " * #{name} (#{_humanize_source_type(source_type)})"
+        puts " * #{name} (#{humanize_source_type(source_type)})"
       end
     end
   end
   
-  def self._humanize_source_type(source_type)
+  private
+  
+  def self.humanize_source_type(source_type)
     case source_type
     when 'svn'
       'Subversion external'
