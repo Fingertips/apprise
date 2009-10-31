@@ -3,14 +3,6 @@ require 'apprise/plugin/base'
 module Apprise
   class Plugin
     class SVN < Base
-      def initialize(pathname)
-        @pathname = pathname
-      end
-      
-      def name
-        @pathname.basename.to_s
-      end
-      
       def url
         @url ||= svn('info').match(/^URL: (.+)$/)[1]
       end
