@@ -22,4 +22,5 @@ module Apprise
   end
 end
 
+require 'apprise/plugin/git'
 require 'apprise/plugin/svn'

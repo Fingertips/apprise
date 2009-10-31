@@ -61,9 +61,30 @@ class Test::Unit::TestCase
   end
   
   def checkout_svn_fixture_repo!
-    FileUtils.rm_rf svn_checkout
-    unless system("svn co -r1 #{svn_repo} #{svn_checkout} > /dev/null 2>&1")
-      raise "Creating checkout failed…"
+    checkout 'svn co -r1', svn_repo, svn_checkout
+  end
+  
+  def git_repo
+    FIXTURE_ROOT + 'repos/git'
+  end
+  
+  def git_checkout
+    Rails.root + 'vendor/plugins/git'
+  end
+  
+  def checkout_git_fixture_repo!
+    checkout 'git clone', git_repo, git_checkout
+    unless system "cd #{git_checkout} && git reset b200b30bcf41e674b8c1bd013316498dfa193077 --hard  > /dev/null 2>&1"
+      raise "Unable to reset the git repo…"
+    end
+  end
+  
+  private
+  
+  def checkout(cmd, repo, checkout)
+    FileUtils.rm_rf checkout
+    unless system("#{cmd} #{repo} #{checkout} > /dev/null 2>&1")
+      raise "Creating checkout of `#{repo}' in `#{checkout}' failed…"
     end
   end
 end
