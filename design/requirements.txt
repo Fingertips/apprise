@@ -1,0 +1,28 @@
+Requirements Apprise
+
+- Manfred Stienstra, manfred@fngtps.com, Fingertips, http://www.fngtps.com
+- Eloy Durán, eloy@fngtps.com, Fingertips, http://www.fngtps.com
+
+Apprise is a Ruby on Rails plugin to keep dependencies of an application up to date.
+
+USER STORIES
+
+Dependencies
+
+As a developer I would like to see all dependencies so that I can inspect them. - todo
+As a developer I would like to see all outdated dependencies so that I know when I'm not up to date. - todo
+As a developer I would like to update all outdated dependencies so that I'm up to date again. - todo
+
+ROLES
+
+Developer: Anyone working on the development of an application.
+
+THEMES
+
+Dependencies: Stories related to dependencies.
+Non-functional: Stories related to non-functional requirements.
+Other: Stories that don’t fit anywhere else.
+
+DEFINITIONS
+
+NOTES
