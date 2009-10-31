@@ -21,3 +21,5 @@ module Apprise
     end
   end
 end
+
+require 'apprise/plugin/svn'

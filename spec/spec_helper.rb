@@ -44,20 +44,26 @@ module Apprise
       require File.join(PLUGIN_ROOT, 'rails', 'init')
     end
     
-    def self.checkout_fixture_repos
-      svn_checkout = Rails.root + 'vendor/plugins/svn'
-      unless svn_checkout.exist?
-        svn_repo = "file://#{FIXTURE_ROOT + 'repos/svn/trunk'}"
-        puts "[!] Creating checkout of `#{svn_repo}' in `#{svn_checkout}'"
-        unless system("svn co #{svn_repo} #{svn_checkout}")
-          raise "Creating checkout failed…"
-        end
-      end
-    end
-    
     def self.start
       load_dependencies
-      checkout_fixture_repos
+    end
+  end
+end
+
+require 'test/unit'
+class Test::Unit::TestCase
+  def svn_repo
+    "file://#{FIXTURE_ROOT + 'repos/svn/trunk'}"
+  end
+  
+  def svn_checkout
+    Rails.root + 'vendor/plugins/svn'
+  end
+  
+  def checkout_svn_fixture_repo!
+    FileUtils.rm_rf svn_checkout
+    unless system("svn co -r1 #{svn_repo} #{svn_checkout} > /dev/null 2>&1")
+      raise "Creating checkout failed…"
     end
   end
 end

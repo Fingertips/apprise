@@ -1,9 +1,11 @@
 process do |files|
   specs = files.take_and_map do |file|
     case file
-    when /^spec\/.+_spec\.rb$/
+    when %r{^spec/.+_spec\.rb$}
       file
-    when /^lib.+?(\w+)\.rb/
+    when %r{^lib/apprise/plugin/(\w+)\.rb$}
+      "spec/functional/#{$1}_spec.rb"
+    when /^lib.+?(\w+)\.rb$/
       "spec/api/#{$1}_spec.rb"
     end
   end
