@@ -1,16 +1,14 @@
+require 'pathname'
+
 module Apprise
   class Plugin
     def self.plugin_root
       Rails.root + 'vendor/plugins'
     end
     
-    def self.plugin?(pathname)
-      pathname.directory? and pathname.basename.to_s != '.svn'
-    end
-    
     def self.all
-      plugin_root.children.map do |child|
-        new(child) if plugin?(child)
+      Pathname.glob(plugin_root + '*').map do |child|
+        new(child) if child.directory?
       end.compact
     end
     
