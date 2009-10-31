@@ -3,5 +3,5 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'apprise'
 
-Apprise.rails_root = Pathname.new(ARGV[0])
+Apprise.rails_root = Pathname.new(ARGV[0] || Dir.pwd)
 Apprise.run
