@@ -6,18 +6,16 @@ module Apprise
       Rails.root + 'vendor/plugins'
     end
     
+    def self.scms
+      @scms ||= []
+    end
+    
     def self.all
       Pathname.glob(plugin_root + '*').map do |child|
-        new(child) if child.directory?
+        if child.directory? && scm = scms.find { |s| s.repo?(child) }
+          scm.new(child)
+        end
       end.compact
-    end
-    
-    def initialize(pathname)
-      @pathname = pathname
-    end
-    
-    def name
-      @pathname.basename.to_s
     end
   end
 end
