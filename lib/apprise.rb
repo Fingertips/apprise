@@ -14,7 +14,19 @@ module Apprise
     aggregate :outdated
   end
   
-  def self.run
+  def self.display_dependencies
+    dependencies = self.dependencies
+    if dependencies.empty?
+      puts "There are no dependencies."
+    else
+      puts "All dependencies"
+      dependencies.each do |name, source_type|
+        puts " * #{name} (#{humanize_source_type(source_type)})"
+      end
+    end
+  end
+  
+  def self.display_outdated
     outdated = self.outdated
     if outdated.empty?
       puts "There are no outdated dependencies."

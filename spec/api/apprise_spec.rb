@@ -40,7 +40,38 @@ describe "Apprise" do
     ]
   end
   
-  it "should print all outdated dependencies" do
+  it "should display when there are no dependencies" do
+    Apprise.stubs(:dependencies).returns([])
+    collect_stdout do
+      Apprise.display_dependencies
+    end.should == "There are no dependencies.\n"
+  end
+  
+  it "should display all dependencies" do
+    Apprise.stubs(:dependencies).returns([
+      ['forestwatcher', 'svn'],
+      ['miso', 'gem'],
+      ['rails', 'git']
+    ])
+    
+    collect_stdout do
+      Apprise.display_dependencies
+    end.should == <<-OUTPUT
+All dependencies
+ * forestwatcher (Subversion external)
+ * miso (Gem)
+ * rails (Git submodule)
+OUTPUT
+  end
+  
+  it "should display when there are no outdated dependencies" do
+    Apprise.stubs(:outdated).returns([])
+    collect_stdout do
+      Apprise.display_outdated
+    end.should == "There are no outdated dependencies.\n"
+  end
+  
+  it "should display all outdated dependencies" do
     Apprise.stubs(:outdated).returns([
       ['forestwatcher', 'svn'],
       ['miso', 'gem'],
@@ -48,7 +79,7 @@ describe "Apprise" do
     ])
     
     collect_stdout do
-      Apprise.run
+      Apprise.display_outdated
     end.should == <<-OUTPUT
 Outdated dependencies
  * forestwatcher (Subversion external)

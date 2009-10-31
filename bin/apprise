@@ -3,5 +3,17 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'apprise'
 
+action = :outdated
+ARGV.clone.options do |options|
+  options.banner = "Usage: apprise [options]"
+  
+  options.on("-o", "--outdated", "Show outdated dependencies (default)") { action = :outdated }
+  options.on("-a", "--all", "Show all dependencies")                     { action = :dependencies }
+  
+  options.on("-h", "--help", "Show this help message.") { puts options; exit }
+
+  options.parse!(ARGV)
+end
+
 Apprise.rails_root = Pathname.new(ARGV[0] || Dir.pwd)
-Apprise.run
+Apprise.send("display_#{action}")
