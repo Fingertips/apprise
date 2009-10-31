@@ -9,9 +9,9 @@ USER STORIES
 
 Dependencies
 
-As a developer I would like to see all dependencies so that I can inspect them. - todo
-As a developer I would like to see all outdated dependencies so that I know when I'm not up to date. - todo
-As a developer I would like to update all outdated dependencies so that I'm up to date again. - todo
+As a developer I would like to see all outdated dependencies so that I know when I'm not up to date. - #1 must done
+As a developer I would like to see all dependencies so that I can inspect them. - #2 could todo
+As a developer I would like to update all outdated dependencies so that I'm up to date again. - #3 could todo
 
 ROLES
 
