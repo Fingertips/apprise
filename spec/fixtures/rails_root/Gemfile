@@ -1,3 +1,4 @@
 gem "rack"
 gem "miso"
-gem "unknown"
+
+source 'http://gemcutter.org'
