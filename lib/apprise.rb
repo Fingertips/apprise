@@ -3,7 +3,11 @@ require 'apprise/bundler'
 
 module Apprise
   def self.outdated
-    []
+    outdated = []
+    if Apprise::Bundler.usable?
+      outdated << Apprise::Bundler.outdated 
+    end
+    outdated
   end
   
   def self.run

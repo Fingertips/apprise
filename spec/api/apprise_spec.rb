@@ -20,11 +20,16 @@ module Collector
 end
 
 describe "Apprise" do
-  xit "should return whether or not all dependencies are up-to-date" do
-    Apprise.should.not.be.up_to_date
+  it "should return the outdated dependencies from the worker classes in alphabetical order" do
+    [Apprise::Bundler].each { |klass| klass.stubs(:usable?).returns(true) }
+    Apprise::Bundler.stubs(:outdated).returns([['miso', 'gem']])
+    
+    Apprise::Bundler.outdated.should == [
+      ['miso', 'gem']
+    ]
   end
   
-  it "should show all outdated dependencies of the application" do
+  it "should print all outdated dependencies" do
     Apprise.stubs(:outdated).returns([
       ['rails', 'git'],
       ['forestwatcher', 'svn'],
