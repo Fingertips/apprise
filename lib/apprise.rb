@@ -4,9 +4,8 @@ require 'apprise/bundler'
 module Apprise
   def self.outdated
     outdated = []
-    if Apprise::Bundler.usable?
-      outdated << Apprise::Bundler.outdated 
-    end
+    outdated.concat Apprise::Bundler.outdated if Apprise::Bundler.usable?
+    outdated.concat Apprise::Plugin.outdated
     outdated
   end
   
