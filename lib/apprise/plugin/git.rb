@@ -27,13 +27,13 @@ module Apprise
       end
       
       def update!
-        git "pull #{current_remote} #{current_branch}"
+        git "pull #{current_remote} #{current_branch} 2>&1"
       end
       
       private
       
       def fetch!
-        git "fetch #{current_remote} #{current_branch}"
+        git "fetch #{current_remote} #{current_branch} 2>&1"
       end
       
       def revision(refspec = nil)

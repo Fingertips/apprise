@@ -50,6 +50,26 @@ module Apprise
   end
 end
 
+
+module Collector
+  class << self
+    attr_accessor :output
+    
+    def write(string)
+      @output ||= []
+      @output << string
+    end
+    
+    def output
+      @output
+    end
+    
+    def reset!
+      @output.clear if @output
+    end
+  end
+end
+
 require 'test/unit'
 class Test::Unit::TestCase
   def svn_repo
@@ -83,6 +103,15 @@ class Test::Unit::TestCase
     unless system "cd #{git_checkout} && git reset b200b30bcf41e674b8c1bd013316498dfa193077 --hard  > /dev/null 2>&1"
       raise "Unable to reset the git repo…"
     end
+  end
+  
+  def collect_stdout
+    Collector.reset!
+    before = $stdout
+    $stdout = Collector
+    yield
+    $stdout = before
+    Collector.output.join
   end
   
   private
