@@ -1,1 +1,14 @@
-Apprise!
+= Apprise!
+
+== Requirements
+
+Apprise currently needs a patched version of Bundler, this version is
+available on the Fingertips GitHub repository:
+
+  http://github.com/Fingertips/bundler
+
+You can install it in the following way:
+
+  $ git clone git://github.com/Fingertips/bundler.git
+  $ cd bundler
+  $ sudo rake install
