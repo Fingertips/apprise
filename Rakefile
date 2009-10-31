@@ -15,6 +15,8 @@ begin
     s.email    = ["manfred@fngtps.com", "eloy@fngtps.com"]
     s.authors  = ["Manfred Stienstra", "Eloy Duran"]
     s.summary  = s.description = "Apprise gives an overview of the dependencies of a Rails application."
+    s.files    -= FileList['.gitignore', 'Rakefile', '.kick', 'spec/**/*', 'spec/fixtures/rails_root/vendor/plugins/.other_hidden_dir/ignore_me!']
+    s.test_files = []
   end
 rescue LoadError
 end
