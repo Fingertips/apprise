@@ -1,1 +1,2 @@
+- Add an `update' task.
 - Use executioner to shell out instead of using backticks.
