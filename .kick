@@ -4,7 +4,7 @@ process do |files|
     when /^spec\/.+_spec\.rb$/
       file
     when /^lib.+?(\w+)\.rb/
-      "spec/#{$1}_spec.rb"
+      "spec/api/#{$1}_spec.rb"
     end
   end
   

@@ -1,4 +1,4 @@
-require File.expand_path('../spec_helper', __FILE__)
+require File.expand_path('../../spec_helper', __FILE__)
 
 describe "Apprise::Plugin" do
   it "should return the plugin root path" do

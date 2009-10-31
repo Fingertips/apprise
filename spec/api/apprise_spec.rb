@@ -1,4 +1,4 @@
-require File.expand_path('../spec_helper', __FILE__)
+require File.expand_path('../../spec_helper', __FILE__)
 
 describe "Apprise" do
   xit "should return whether or not all dependencies are up-to-date" do
