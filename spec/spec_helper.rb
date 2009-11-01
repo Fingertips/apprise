@@ -72,7 +72,13 @@ module Collector
   end
 end
 
+if RUBY_VERSION >= '1.9.0'
+  require 'rubygems'
+  gem 'test-unit'
+end
+
 require 'test/unit'
+
 class Test::Unit::TestCase
   def setup
     Apprise.rails_root = Pathname.new(File.expand_path('../fixtures/rails_root', __FILE__))
