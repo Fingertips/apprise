@@ -18,3 +18,7 @@ Apprise currently looks for three types of dependencies.
 
   $ gem install apprise --source http://gemcutter.org
   $ apprise /path/to/rails
+
+== Support
+
+Apprise is known to run on Ruby 1.8.7 and 1.9.2.
