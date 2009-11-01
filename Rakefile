@@ -7,6 +7,12 @@ Rake::TestTask.new(:spec) do |t|
   t.verbose = true
 end
 
+desc 'Remove checkouts of fixture repos'
+task :clean do
+  rm_rf 'spec/fixtures/rails_root/vendor/plugins/git'
+  rm_rf 'spec/fixtures/rails_root/vendor/plugins/svn'
+end
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|

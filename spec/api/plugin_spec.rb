@@ -10,6 +10,8 @@ describe "Apprise::Plugin" do
   
   it "should return an instance for each plugin" do
     checkout_svn_fixture_repo!
+    checkout_git_fixture_repo!
+    
     plugins = Apprise::Plugin.all
     plugins.map(&:name).should == %w{ git svn }
     plugins.map(&:class).should == [Apprise::Plugin::Git, Apprise::Plugin::SVN]
