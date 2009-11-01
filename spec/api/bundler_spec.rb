@@ -33,5 +33,21 @@ if Apprise::Bundler.usable?
         ['rails', 'gem']
       ]
     end
+    
+    it "should not return dependencies if there are no dependencies" do
+      Apprise::Bundler.stubs(:gem_dependencies).returns([])
+      Apprise::Bundler.dependencies.should == []
+    end
+    
+    it "should return dependencies if bundler finds dependencies" do
+      Apprise::Bundler.stubs(:gem_dependencies).returns([
+        mock(:name => 'miso'), mock(:name => 'rack'), mock(:name => 'rails')
+      ])
+      Apprise::Bundler.dependencies.should == [
+        ['miso', 'gem'],
+        ['rack', 'gem'],
+        ['rails', 'gem']
+      ]
+    end
   end
 end
