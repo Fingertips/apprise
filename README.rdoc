@@ -18,19 +18,3 @@ Apprise currently looks for three types of dependencies.
 
   $ gem install apprise --source http://gemcutter.org
   $ apprise /path/to/rails
-
-== Requirements
-
-Apprise currently needs a patched version of Bundler, this version is
-available on the Fingertips GitHub repository:
-
-  http://github.com/Fingertips/bundler
-
-You can install it in the following way:
-
-  $ git clone git://github.com/Fingertips/bundler.git
-  $ cd bundler
-  $ sudo rake install
-
-If you don't use Bundler, you don't have to install it. Apprise will
-work without it as well.
