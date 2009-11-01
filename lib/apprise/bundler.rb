@@ -16,6 +16,8 @@ module Apprise
         repository.outdated_gems.map do |name|
           [name, 'gem']
         end
+      rescue ::Bundler::ManifestFileNotFound
+        []
       end
       
       def self.repository
@@ -24,10 +26,16 @@ module Apprise
       
       def self.gem_dependencies
         environment.send(:gem_dependencies)
+      rescue ::Bundler::ManifestFileNotFound
+        []
       end
       
       def self.environment
         @environment ||= ::Bundler::Environment.load(gemfile_path)
+      end
+      
+      def self.reset!
+        @environment = nil
       end
 
       def self.usable?; true; end

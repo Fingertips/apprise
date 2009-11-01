@@ -2,6 +2,10 @@ require File.expand_path('../../spec_helper', __FILE__)
 
 if Apprise::Bundler.usable?
   describe "Apprise::Bundler" do
+    before do
+      Apprise::Bundler.reset!
+    end
+    
     it "should return all dependencies" do
       Apprise::Bundler.stubs(:gem_dependencies).returns([
         stub(:name => 'miso'),
@@ -18,7 +22,12 @@ if Apprise::Bundler.usable?
     it "should return the gemfile path" do
       Apprise::Bundler.gemfile_path.should == Pathname.new(File.expand_path('../../fixtures/rails_root/Gemfile', __FILE__))
     end
-  
+    
+    it "should not return outdated gems if there is no Gemfile" do
+      Bundler::Environment.stubs(:load).raises(Bundler::ManifestFileNotFound)
+      Apprise::Bundler.outdated.should == []
+    end
+    
     it "should not return outdated gems if there are no outdated gems" do
       Apprise::Bundler.outdated.should == []
     end
@@ -32,6 +41,11 @@ if Apprise::Bundler.usable?
         ['rack', 'gem'],
         ['rails', 'gem']
       ]
+    end
+    
+    it "should not return dependencies if there is no Gemfile" do
+      Bundler::Environment.stubs(:load).raises(Bundler::ManifestFileNotFound)
+      Apprise::Bundler.dependencies.should == []
     end
     
     it "should not return dependencies if there are no dependencies" do
