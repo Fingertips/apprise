@@ -76,25 +76,33 @@ class Test::Unit::TestCase
     Apprise.rails_root = Pathname.new(File.expand_path('../fixtures/rails_root', __FILE__))
   end
   
+  def clean_environment!
+    ENV.keys.dup.each do |key|
+      if key =~ /^GIT_/
+        ENV[key] = nil
+      end
+    end
+  end
+  
   def svn_repo
     "file://#{FIXTURE_ROOT + 'repos/svn/trunk'}"
-  end
-  
-  def svn_checkout
-    Apprise.rails_root + 'vendor/plugins/svn'
-  end
-  
-  def checkout_svn_fixture_repo!
-    checkout 'svn co -r1', svn_repo, svn_checkout
-    Apprise::Plugin::SVN.new(svn_checkout)
   end
   
   def git_repo
     FIXTURE_ROOT + 'repos/git'
   end
   
+  def svn_checkout
+    Apprise.rails_root + 'vendor/plugins/svn'
+  end
+  
   def git_checkout
     Apprise.rails_root + 'vendor/plugins/git'
+  end
+  
+  def checkout_svn_fixture_repo!
+    checkout 'svn co -r1', svn_repo, svn_checkout
+    Apprise::Plugin::SVN.new(svn_checkout)
   end
   
   def checkout_git_fixture_repo!
@@ -103,6 +111,8 @@ class Test::Unit::TestCase
         raise "Unable to unpack git fixture repo…"
       end
     end
+    
+    clean_environment!
     
     checkout 'git clone', git_repo, git_checkout
     unless system "cd #{git_checkout} && git reset b200b30bcf41e674b8c1bd013316498dfa193077 --hard  > /dev/null 2>&1"
