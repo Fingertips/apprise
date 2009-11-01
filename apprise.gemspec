@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{apprise}
-  s.version = "0.9.9"
+  s.version = "0.9.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Manfred Stienstra", "Eloy Duran"]
-  s.date = %q{2009-10-31}
+  s.date = %q{2009-11-01}
   s.default_executable = %q{apprise}
   s.description = %q{Apprise gives an overview of the dependencies of a Rails application.}
   s.email = ["manfred@fngtps.com", "eloy@fngtps.com"]
